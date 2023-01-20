@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: news and weather
+  description: |-
+    This is a sample url service
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:8180
+
+paths:
+  /v1/user/signup:
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: Register a user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+
+      responses:
+        "200":
+            description: successful operation
+            content:
+              application/json:
+                examples:
+                  user registered successfully:
+                    value:
+                      message: User Registered Successfully
+        "400":
+          description: Bad Request - see `message` field for additional information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+        "403":
+          description: Unauthorized 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"        
+
+  /v1/user/login:
+    get:
+      tags:
+        - User
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: email
+          in: query
+          description: The email for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/login'
+        '400':
+          description: Invalid username/password supplied
+        "403":
+          description: Unauthorized 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"  
+ 
+
+  /v1/news:
+    get:
+      tags:
+        - News
+      summary: Get news
+      description: ''
+      operationId: getNews
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - name: keyword
+          in: query
+          description: The keyword for news
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: successful operation
+
+    
+        '400':
+          description: Invalid username/password supplied
+        "403":
+          description: Unauthorized 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"  
+ 
+  /v1/weather:
+    get:
+      tags:
+        - Weather
+      summary: Get Weather
+      description: ''
+      operationId: getWeather
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+
+
+      responses:
+        '200':
+          description: successful operation
+
+        '400':
+          description: Invalid username/password supplied 
+        "403":
+          description: Unauthorized 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"  
+components:
+  parameters:
+   AccessToken:
+      name: "x-access-token"
+      in: header
+      description: Access Token.
+      required: true
+      schema:
+        type: string
+  schemas:
+
+    User:
+      type: object
+      properties:
+
+        name:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+
+
+    login:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "login successful"
+        toke:
+          type: string
+          example: "as3sdsdjlkd9s"
+    BadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Invalid request body.
+      
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+
+  requestBodies:
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+
+   

@@ -1,0 +1,13 @@
+{
+    "all": true,
+    "exclude": [
+        "index.js",
+        "conf/**",
+        "router/**/*.js",
+        "coverage/lcov-report/*.js",
+        "models/*.js",
+        "controllers/**/*.js",
+        "utils/writer.js",
+        "utils/constant.js"
+    ]
+}
