@@ -3,6 +3,12 @@ var Response = require("../utils/response");
 const conf = require("../conf/conf")
 const axios = require("axios")
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns get news
+ */
 exports.getNews = async function (req, res) {
   try {
 

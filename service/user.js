@@ -5,6 +5,11 @@ const Userdb = require("../db/user.db")
 const jwt = require('jsonwebtoken');
 const conf = require("../conf/conf")
 
+/**
+ * 
+ * @param {*} body 
+ * @returns creates a user
+ */
 exports.signUp = async function (body) {
   try {
     let valid = validate.isValidRegisterUserBody(body);
@@ -21,7 +26,12 @@ exports.signUp = async function (body) {
   }
 };
 
-
+/**
+ * 
+ * @param {*} email 
+ * @param {*} password 
+ * @returns validate the details
+ */
 exports.getDetails = async function (email, password) {
   try {
 
@@ -38,7 +48,7 @@ exports.getDetails = async function (email, password) {
       { user_id: user._id, email },
       conf.JWT_SECRET_KEY,
       {
-        expiresIn: "5h",
+        expiresIn: conf.TOKEN_VALID_TIME,
       }
     );
     let res={}

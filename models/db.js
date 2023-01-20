@@ -3,7 +3,7 @@
 var mongoose = require("mongoose");
 
 const mongoConf = require(process.env.CONFIG_DIR +"/mongoConf").conf;
-console.log(mongoConf);
+
 const wait = (ms) => {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);

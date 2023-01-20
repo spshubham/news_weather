@@ -1,0 +1,20 @@
+1. Read 1 GB of the data in main memory and sort.
+2. Write the sorted data to disk.
+3. Repeat steps 1 and 2 until all of the data is in sorted 1 GB chunks (there are 10 GB / 1 GB = 10 chunks), which now need to be merged into one single output file.
+4. Merge the chunks using heap sort(Min heap)
+5. Take first elements of each chunks and put it in min heap, also put pointers of each element to track the elements
+6. Take the first element from min heap and put it in output file
+7. Repeat the step 5 and step 6 until all data is sorted
+8. Print the output file
+
+
+example:
+suppose we have 3 chunks like
+chunks1 = 2-5-6-9
+chunks2 = 1-3-4-7
+chunks3 = 4-8-10-11
+
+All the first elements of each chunk inserted into the heap will contain 2-1-4.
+Now we will get 1 as the first element from the heap. And that element is inserted into the output file.
+as we got the first element from chunk2 so, We will move the pointer of chunk2 from 1 to 3 and the next set element will be 2-3-4
+we repeat the same process till all the data in all chunks is traversed 

@@ -2,6 +2,12 @@
 const User = require("../models/user.model");
 const Response = require("../utils/response");
 const bcrypt = require("bcrypt")
+
+/**
+ * 
+ * @param {*} body 
+ * @returns creates a user 
+ */
 exports.create = async(body) =>{
     try {
         let pass = body.password;
@@ -18,6 +24,13 @@ exports.create = async(body) =>{
         else throw Response.UnexpectedError;
     }
 }
+
+/**
+ * 
+ * @param {*} email 
+ * @param {*} password 
+ * @returns fetch the details
+ */
 exports.findByEmailAndPassword = async(email, password) => {
     try {
         

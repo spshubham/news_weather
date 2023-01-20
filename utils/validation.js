@@ -2,14 +2,21 @@ const { default: mongoose } = require("mongoose");
 const emailRegex = /^[\w-\.\+]+@([\w-]+\.)+[\w-]{2,5}$/;
 const response = require("./response");
 const URL = require("url").URL;
-exports.isValidMongooseObjectId = (id) => {
-    return mongoose.isValidObjectId(id);
-}
 
+/**
+ * 
+ * @param {*} email 
+ * @returns validate the email
+ */
 exports.isEmail = (email) =>{
     return emailRegex.test(email);
 }
 
+/**
+ * 
+ * @param {*} body 
+ * @returns validate the req.body
+ */
 exports.isValidRegisterUserBody = (body) =>{
     try{    
         
@@ -42,34 +49,3 @@ exports.isValidRegisterUserBody = (body) =>{
     }
 
 }
-
-exports.validateURLReq = (body)=>{
-    let isValid = true;
-    if (body.url_name && !this.stringIsAValidUrl(body.url_name)){
-       return {
-        isValid: false,
-        payload: response.InvalidURL
-       }
-    } 
-
-    if (body.frequency && typeof body.frequency != "number" || body.frequency<=0){
-        return {
-         isValid: false,
-         payload: response.InvalidFrequency
-        }
-     } 
-    
-    return {
-        isValid:true
-    }
-    
-}
-
-exports.stringIsAValidUrl = (s) => {
-    try {
-      new URL(s);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };

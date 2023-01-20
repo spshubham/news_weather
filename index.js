@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var serverPort = 8180;
+var serverPort = 8181;
 
 const dbConnection = require("./models/db");
 const writer = require("./utils/writer");
